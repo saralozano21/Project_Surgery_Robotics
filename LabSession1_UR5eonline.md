@@ -10,3 +10,4 @@
 Universal Robots is a very reputed robotic company distributing collaborative robots for industrial, research and academic fields.
 
 ### The objective of this laboratory session will be:
+- Learn the basic concepts of the Universal Robot UR5e.
