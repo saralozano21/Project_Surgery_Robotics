@@ -3,7 +3,7 @@
 ## Degree in Biomedical Engineering
 ## ROBOTICS AND CONTROL OF BIOMEDICAL SYSTEMS
 # **Surgery Robotics Project**
-### Laboratory session 2: Biorobotics Laboratory Surgery Robotic system Project improvements
+### Laboratory sessions 3 & 4: Biorobotics Laboratory Surgery Robotic system Project improvements
 
 ---
 
@@ -20,23 +20,29 @@ You have seen the complexity to perform a simple surgery process in roboDK simul
 ### Proposed improvements for Surgery Robotic system prototype in Biorobotcs Lab
 
 The main improvements are based on:
-- Endowrist module sends RPY angles to Gripper module
-- Gripper module:
-    - receives the RPY angles and correct the gripper orientation
-    - receives the torques from the Servomotors module.
-    - Apply a vibration to the gripper module vibration actuator to feel the contact with the tissue.
 - Servomotors module:
     - apply the RPY angles to the four servomotors to obtain the desired Gripper orientation.
     read the torques on the four servomotors to detect the gripper contact with the tissue.
     - send these torques to the Gripper module and PC.
-- PC simulation and control real surgery robotic system:
-    - receives the RPY correcte angles from the Gripper module and perform the simulated gripper orientation
+    ![ServomotorsModule](././Images/Session1/Servos1.png)
+    ![ServomotorsModule](././Images/Session1/Servos2.png)
+    ![ServomotorsModule](././Images/Session1/Servos3.png)
+
+- Endowrist module:
+    - send RPY angles to Gripper module
+- Gripper module:
+    - receives the RPY angles from Endowrist module and correct the gripper orientation
+    - receives the torques from the Servomotors module.
+    - Apply a vibration with actuator to feel the contact with the tissue.
+
+- PC module:
+    - receives the RPY corrected angles from the Gripper module and perform the simulated gripper orientation
     - receives the RPY angles from the Endowrist module and apply them to the UR5e robot arm with a proper python based sockets program
     - receives the torques from the Servomotors module and apply a color code and write the numeric values
     
 ![Proposed Project Improvements](././Images/Session1/ProjectImprovements2.png)
 
-### Laboratory session 2: Tasks
+### Laboratory sessions: Tasks
 
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup

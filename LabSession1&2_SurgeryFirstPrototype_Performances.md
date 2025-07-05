@@ -3,7 +3,7 @@
 ## Degree in Biomedical Engineering
 ## ROBOTICS AND CONTROL OF BIOMEDICAL SYSTEMS
 # **Surgery Robotics Project**
-### Laboratory session 1: DaVinci surgery system prototype setup and performances
+### Laboratory sessions 1 & 2: DaVinci surgery system prototype setup and performances
 
 ---
 
@@ -76,7 +76,7 @@ A graphical operation of this First simple surgery robotic system prototype is s
 The different modes of operation of the system are:
 ![Surgery Modes of Operation](././Images/Session1/SurgeryModes.png)
 
-### Laboratory session 1: Tasks
+### Laboratory sessions: Tasks
 
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup
