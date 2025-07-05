@@ -34,9 +34,9 @@ The main improvements are based on:
     - receives the RPY angles from the Endowrist module and apply them to the UR5e robot arm with a proper python based sockets program
     - receives the torques from the Servomotors module and apply a color code and write the numeric values
     
-![Proposed Project Improvements](././Images/Session1/ProjectImprovements.png)
+![Proposed Project Improvements](././Images/Session1/ProjectImprovements2.png)
 
-### Laboratory session 1: Tasks
+### Laboratory session 2: Tasks
 
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup
