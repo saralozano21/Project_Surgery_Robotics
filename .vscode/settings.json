@@ -11,5 +11,5 @@
     "editor.tabSize": 4, // Set tab size to 4 spaces
     
     // Color theme setting
-    "workbench.colorTheme": "Visual Studio Light" // Set your preferred color theme here
+    "workbench.colorTheme": "Visual Studio Light"
 }
