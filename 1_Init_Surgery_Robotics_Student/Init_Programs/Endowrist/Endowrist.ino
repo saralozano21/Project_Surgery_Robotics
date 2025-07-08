@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>
 
 // Device ID
-const char *deviceId = "G4_Endo";
+const char *deviceId = "G5_Endo";
 
 // Wi-Fi credentials
 const char *ssid = "Robotics_UB";
@@ -18,8 +18,7 @@ int s3Status = HIGH;
 int s4Status = HIGH;
 
 // UDP settings
-IPAddress receiverESP32IP(192, 168, 1, 41); // IP address of the G4-Gripper ESP32 - CHANGE THIS!
-IPAddress receiverComputerIP(192, 168, 1, 5); // IP address of your PC4-computer - CHANGE THIS!
+IPAddress receiverComputerIP(192, 168, 1, 5); // IP address of your PC5-computer - CHANGE THIS!
 const int udpPort = 12345;
 WiFiUDP udp;
 
@@ -27,7 +26,7 @@ WiFiUDP udp;
 MPU9250 mpu;
 
 // Orientation data
-float Gri_roll = 0.0, Gri_pitch = 0.0, Gri_yaw = 0.0;
+float Endo_roll = 0.0, Endo_pitch = 0.0, Endo_yaw = 0.0;
 
 void connectToWiFi() {
   Serial.print("Connecting to Wi-Fi");
@@ -44,9 +43,9 @@ void connectToWiFi() {
 
 void updateOrientation() {
   if (mpu.update()) {
-    Gri_yaw = -mpu.getYaw();
-    Gri_pitch = -mpu.getPitch();
-    Gri_roll = mpu.getRoll();
+    Endo_yaw = -mpu.getYaw();
+    Endo_pitch = -mpu.getPitch();
+    Endo_roll = mpu.getRoll();
     s3Status = digitalRead(PIN_S3); // Read the state of the button
     s4Status = digitalRead(PIN_S4); // Read the state of the button
   }
@@ -55,9 +54,9 @@ void updateOrientation() {
 void sendOrientationUDP() {
   StaticJsonDocument<256> doc;
   doc["device"] = deviceId;
-  doc["roll"] = Gri_roll;
-  doc["pitch"] = Gri_pitch;
-  doc["yaw"] = Gri_yaw;
+  doc["roll"] = Endo_roll;
+  doc["pitch"] = Endo_pitch;
+  doc["yaw"] = Endo_yaw;
   doc["s3"] = s3Status; // Button 1 status
   doc["s4"] = s4Status; // Button 2 status
 
@@ -67,11 +66,6 @@ void sendOrientationUDP() {
         Serial.println(F("Serialization Failed"));
         return;
     }
-
-  // Send to ESP32
-  udp.beginPacket(receiverESP32IP, udpPort);
-  udp.write((const uint8_t*)jsonBuffer, bytes); // Cast to const uint8_t*
-  udp.endPacket();
 
   // Send to Computer
   udp.beginPacket(receiverComputerIP, udpPort);
@@ -87,7 +81,7 @@ void setup() {
   // Inicialitza el MPU-9250
   if (!mpu.setup(0x68)) {
     while (1) {
-      Serial.println("MPU connection failed. Please check your connection with `connection_check` example.");
+      Serial.println("MPU connection failed.");
       delay(5000);
     }
   }

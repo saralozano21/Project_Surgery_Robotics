@@ -76,12 +76,46 @@ A graphical operation of this First simple surgery robotic system prototype is s
 The different modes of operation of the system are:
 ![Surgery Modes of Operation](././Images/Session1/SurgeryModes.png)
 
+### Init Hardware-Software setup
+The **hardware setup** of the first prototype of the DaVinci surgery system is based on:
+- A "Robotics_UB" router: Assigning a fixed IP address to each module (x corresponds to group number)
+  - SSID: Robotics_UB
+  - Password: rUBot_xx
+- Hardware modules:
+  - UR5e robot arm with Endowrist tool
+  - PC control with roboDK program and python scripts (IP:192.168.1.x)
+  - ESP32 based wireless modules:
+    - ESP32 based wireless Gripper control board (IP:192.168.1.x1)
+    - ESP32 based wireless Endowrist control board (IP:192.168.1.x2)
+    - ESP32 based wireless Servomotors control board (IP:192.168.1.x3)
+
+The **software setup** of the first prototype of the DaVinci surgery system is based on:
+- Init_SurgeryRobotics.rdk: program in roboDK virtual environment 
+- Python script programs:
+    - Read_from_Gripper.py: Reads the PRY Gripper module data
+    - Read_from_Endowrist.py: Reads the RPY Endowrist module data
+    - Init_SurgeryRobotics_simulation.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm in simulated roboDK program environment
+    Init_SurgeryRobotics_real.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm using sockeds in real environment
+- Arduino programs:
+    - Gripper.ino: Arduino program for the Gripper module
+    - Endowrist.ino: Arduino program for the Endowrist module
+    - Servomotors.ino: Arduino program for the Servomotors module
+
+### Init Hardware-Software setup functionality
+The Initial functionality of the first prototype of the DaVinci surgery system is based on:
+    - The Gripper module reads its RPY (Roll, Pitch, Yaw) orientation and send them to Servomotors module and PC
+    - The Endowrist module reads its RPY (Roll, Pitch, Yaw) orientation and send them to PC
+    - The Servomotors module reads the RPY (Roll, Pitch, Yaw) orientation from Gripper module and applies it to the Endowrist tool
+    - In simulation: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
+    - In Real: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
+
+
 ### Laboratory sessions: Tasks
 
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup
 - Save the ESP32 InitialPrograms for the 3 ESP32 modules using th VScode Arduino Community Edition. Take care about the proper IP address of each module and PC.
-- Run the InitSurgeryRobotic_students.rdk file in the roboDK program to visualize the UR5e robot arm and the Endowrist tool.
+- Run the InitSurgeryRobotic_simulation.rdk file in the roboDK program to visualize the UR5e robot arm and the Endowrist tool.
 - Test the system performances described above 
 - Try to perform a suture process in simulation according to the following video:
 [![suture process in simulation](Images/Session1/training.png)](https://youtu.be/1t3-Ggcp_Hg?feature=shared)

@@ -5,15 +5,15 @@
 #include <ESP32Servo.h>
 
 // Device ID
-const char *deviceId = "G4_Servos";
+const char *deviceId = "G5_Servos";
 
 // Wi-Fi credentials
 const char *ssid = "Robotics_UB";
 const char *password = "rUBot_xx";
 
 // UDP settings
-IPAddress receiverESP32IP(192, 168, 1, 41); // IP address of the receiver ESP32 G4_Gripper - CHANGE THIS!
-IPAddress receiverComputerIP(192, 168, 1, 4); // IP address of your G4-computer - CHANGE THIS!
+IPAddress receiverESP32IP(192, 168, 1, 51); // IP address of the receiver ESP32 G5_Gripper
+IPAddress receiverComputerIP(192, 168, 1, 5); // IP address of your G5-computer
 const int udpPort = 12345;
 WiFiUDP udp;
 
@@ -23,7 +23,7 @@ Servo servo_pitch;
 Servo servo_roll1; 
 Servo servo_roll2; // DECLARACIÓ DE SERVOS
 
-// PINS DELS SERVOS (igual que al codi servos_g4.ino)
+// PINS DELS SERVOS
 // Yaw
 const int PIN_ANALOG_YAW = 36;
 const int PIN_SIGNAL_YAW = 32;
@@ -66,32 +66,6 @@ void connectToWiFi() {
   Serial.println("IP Address: " + WiFi.localIP().toString());
   Serial.print("ESP32 MAC Address: ");
   Serial.println(WiFi.macAddress());
-}
-
-void sendTorquesUDP() {
-  StaticJsonDocument<256> doc;
-  doc["device"] = deviceId;
-  doc["t_roll1"] = Torque_roll1;
-  doc["t_roll2"] = Torque_roll2;
-  doc["t_pitch"] = Torque_pitch;
-  doc["t_yaw"] = Torque_yaw;
-
-  char jsonBuffer[512];
-  size_t bytes = serializeJson(doc, jsonBuffer);
-    if (bytes == 0){
-        Serial.println(F("Serialization Failed"));
-        return;
-    }
-
-  // Send to ESP32 Gri
-  udp.beginPacket(receiverESP32IP, udpPort);
-  udp.write((const uint8_t*)jsonBuffer, bytes); // Cast to const uint8_t*
-  udp.endPacket();
-
-  // Send to Computer
-  udp.beginPacket(receiverComputerIP, udpPort);
-  udp.write((const uint8_t*)jsonBuffer, bytes); // Cast to const uint8_t*
-  udp.endPacket();
 }
 
 void receiveOrientationUDP() {
@@ -158,33 +132,12 @@ float getTorque(float& sum, int analogPin, float& previous) {
 // Funció per a moure els servos a la posició del gripper
 
 void moveServos() {
-  // Protecció de moviments (evitar salts massa grans)
-  // if (abs(Gri_roll - OldValueRoll) > 10 && abs(Gri_roll - OldValueRoll) < 350) {
-  //   roll = OldValueRoll;
-  // } else {
-  //   roll = Gri_roll;
-  // }
-  // Sense protecció de moviments
   roll = Gri_roll;
   OldValueRoll = roll;
-  
-  // Amb protecció de moviments (no va)
-  // if (abs(Gri_pitch - OldValuePitch) > 10 && abs(Gri_pitch - OldValuePitch) < 350) {
-  //   pitch = OldValuePitch;
-  // } else {
-  //   pitch = Gri_pitch;
-  // }
-
-  // Sense protecció de moviments
   pitch = Gri_pitch;
   OldValuePitch = pitch;
-
-  // if (abs(Gri_yaw - OldValueYaw) > 10 && abs(Gri_yaw - OldValueYaw) < 350) {
-  //   yaw = OldValueYaw;
-  // } else {
-  //   yaw = Gri_yaw;
-  // }
-  // OldValueYaw = yaw;
+  yaw = Gri_yaw;
+  OldValueYaw = yaw;
 
   // Control de servos 
   float delta = 0;  // valor base
@@ -198,11 +151,6 @@ void moveServos() {
   servo_pitch.write(pitch);
   servo_yaw.write(yaw);
 
-  // Torques
-  Torque_roll1 = getTorque(sumRoll1, PIN_ANALOG_ROLL1, prevRoll1);
-  Torque_roll2 = getTorque(sumRoll2, PIN_ANALOG_ROLL2, prevRoll2);
-  Torque_pitch = getTorque(sumPitch, PIN_ANALOG_PITCH, prevPitch);
-  Torque_yaw = getTorque(sumYaw, PIN_ANALOG_YAW, prevYaw);
 }
 
 
@@ -246,6 +194,5 @@ void setup() {
 void loop() {
   receiveOrientationUDP();
   moveServos(); // Move servos to the position of the gripper
-  sendTorquesUDP(); // Send IMU data to computer with UDP  
   delay(10);
 }

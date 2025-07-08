@@ -91,22 +91,19 @@ def receive_response(t):
         exit(1) #Non-zero exit status code to indicate the error
 # Function to read UDP data and update the global variable
 def read_data_UDP():
-    global Endowrist_rpy, Gripper_rpy, Servo_torques, data_lock
+    global Endowrist_rpy, Gripper_rpy, data_lock
     while True:
         try:
             data, addr = sock.recvfrom(BUFFER_SIZE) 
             try:
                 received_data = json.loads(data.decode())
                 device_id = received_data.get("device")
-                if device_id == "G4_Endo":
+                if device_id == "G5_Endo":
                     with data_lock:
                         Endowrist_rpy = received_data
-                elif device_id == "G4_Gri":
+                elif device_id == "G5_Gri":
                     with data_lock:
                         Gripper_rpy = received_data
-                elif device_id == "G4_Servos":
-                    with data_lock:
-                        Servo_torques = received_data
             except json.JSONDecodeError:
                 print("Error decoding JSON data")
         except socket.error as e:
@@ -115,12 +112,10 @@ def read_data_UDP():
             print("Socket closed.")
             break
 
-
-
 # Function to process the latest UDP data and move the robot
 def move_robot(robot, gripper, needle, text_label):
-    global ZERO_YAW_TOOL, ZERO_YAW_GRIPPER, Endowrist_rpy, Gripper_rpy, Servo_torques, data_lock, robot_is_connected
-    global e_roll, e_pitch, e_yaw, g_roll, g_pitch, g_yaw, t_roll1, t_roll2, t_pitch, t_yaw, s1, s2, s3, s4
+    global ZERO_YAW_TOOL, ZERO_YAW_GRIPPER, Endowrist_rpy, Gripper_rpy, data_lock, robot_is_connected
+    global e_roll, e_pitch, e_yaw, g_roll, g_pitch, g_yaw, s1, s2, s3, s4
     
     endowrist_orientation_msg = ""
     gripper_orientation_msg = ""
@@ -131,7 +126,7 @@ def move_robot(robot, gripper, needle, text_label):
         with data_lock:
             current_Endowrist_rpy = Endowrist_rpy
             current_Gripper_rpy = Gripper_rpy
-            current_Servo_torques = Servo_torques
+
         if current_Endowrist_rpy:
             e_roll = Endowrist_rpy.get("roll")
             e_pitch = Endowrist_rpy.get("pitch")
@@ -170,12 +165,6 @@ def move_robot(robot, gripper, needle, text_label):
 
                 if robot.MoveL_Test(robot.Joints(), new_pose) == 0:
                     robot.MoveL(new_pose, True)
-                    if robot_is_connected:
-                        # Send the endowrist pose to the robot
-                        Xr, Yr, Zr, rr, pr, yr = Pose_2_TxyzRxyz(new_pose)
-                        endowrist_pose_msg = f"movel(p[{Xr}, {Yr}, {Zr}, {rr}, {pr}, {yr}], a={accel_mss}, v={speed_ms}, t={timel2}, r=0.0000)"
-                        send_ur_script(endowrist_pose_msg)
-                        receive_response(timel2)
                 else:
                     status_message = "❌ No es pot moure més en Z (relatiu)"
 
@@ -203,16 +192,6 @@ def move_robot(robot, gripper, needle, text_label):
                 needle.setPose(TxyzRxyz_2_Pose([0, 0, 0, 0, 0, 0]))
                 status_message = "🔵 S2 premut: agulla agafada"
                 
-        # Moure el robot amunt o avall segons els botons
-                
-        if current_Servo_torques:
-            t_roll1 = Servo_torques.get("t_roll1")
-            t_roll2 = Servo_torques.get("t_roll2")
-            t_pitch = Servo_torques.get("t_pitch")
-            t_yaw = Servo_torques.get("t_yaw")
-            servo_torques_msg = f"T_R1={round(t_roll1)} T_R2={round(t_roll2)} T_P={round(t_pitch)} T_W={round(t_yaw)}"
-            #print(f"Servo torques: {servo_torques_msg}")
-            
         # Update the label with the latest values
         update_text_label(text_label, endowrist_orientation_msg, gripper_orientation_msg, status_message, servo_torques_msg)
 
