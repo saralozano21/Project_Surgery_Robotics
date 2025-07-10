@@ -83,7 +83,7 @@ The **hardware setup** of the first prototype of the DaVinci surgery system is b
   - Password: rUBot_xx
 - Hardware modules:
   - UR5e robot arm with Endowrist tool
-  - PC control with roboDK program and python scripts (IP:192.168.1.x)
+  - PC control with roboDK program and python scripts (IP:192.168.1.x5)
   - ESP32 based wireless modules:
     - ESP32 based wireless Gripper control board (IP:192.168.1.x1)
     - ESP32 based wireless Endowrist control board (IP:192.168.1.x2)
@@ -95,7 +95,7 @@ The **software setup** of the first prototype of the DaVinci surgery system is b
     - Read_from_Gripper.py: Reads the PRY Gripper module data
     - Read_from_Endowrist.py: Reads the RPY Endowrist module data
     - Init_SurgeryRobotics_simulation.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm in simulated roboDK program environment
-    Init_SurgeryRobotics_real.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm using sockeds in real environment
+    - Init_SurgeryRobotics_real.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm using sockeds in real environment
 - Arduino programs:
     - Gripper.ino: Arduino program for the Gripper module
     - Endowrist.ino: Arduino program for the Endowrist module
@@ -103,11 +103,11 @@ The **software setup** of the first prototype of the DaVinci surgery system is b
 
 ### Init Hardware-Software setup functionality
 The Initial functionality of the first prototype of the DaVinci surgery system is based on:
-    - The Gripper module reads its RPY (Roll, Pitch, Yaw) orientation and send them to Servomotors module and PC
-    - The Endowrist module reads its RPY (Roll, Pitch, Yaw) orientation and send them to PC
-    - The Servomotors module reads the RPY (Roll, Pitch, Yaw) orientation from Gripper module and applies it to the Endowrist tool
-    - In simulation: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
-    - In Real: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
+- The Gripper module reads its RPY (Roll, Pitch, Yaw) orientation and send them to Servomotors module and PC
+- The Endowrist module reads its RPY (Roll, Pitch, Yaw) orientation and send them to PC
+- The Servomotors module reads the RPY (Roll, Pitch, Yaw) orientation from Gripper module and applies it to the Endowrist tool
+- In simulation: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
+- In Real: The PC reads the RPY (Roll, Pitch, Yaw) orientation from Gripper and Endowrist modules and sends it to the UR5e robot arm in roboDK program environment
 
 
 ### Laboratory sessions: Tasks
