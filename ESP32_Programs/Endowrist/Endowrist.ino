@@ -18,7 +18,7 @@ int s3Status = HIGH;
 int s4Status = HIGH;
 
 // UDP settings
-IPAddress receiverComputerIP(192, 168, 1, 5); // IP address of your PC5-computer - CHANGE THIS!
+IPAddress receiverComputerIP(192, 168, 1, 55); // IP address of your PC5-computer - CHANGE THIS!
 const int udpPort = 12345;
 WiFiUDP udp;
 

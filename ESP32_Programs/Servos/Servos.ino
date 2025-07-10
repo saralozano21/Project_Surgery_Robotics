@@ -13,7 +13,7 @@ const char *password = "rUBot_xx";
 
 // UDP settings
 IPAddress receiverESP32IP(192, 168, 1, 51); // IP address of the receiver ESP32 G5_Gripper
-IPAddress receiverComputerIP(192, 168, 1, 5); // IP address of your G5-computer
+IPAddress receiverComputerIP(192, 168, 1, 55); // IP address of your G5-computer
 const int udpPort = 12345;
 WiFiUDP udp;
 
@@ -89,7 +89,7 @@ void receiveOrientationUDP() {
       }
 
       const char* device = doc["device"];
-      if (strcmp(device, "G4_Gri") == 0) {
+      if (strcmp(device, "G5_Gri") == 0) {
         Gri_roll = round(doc["roll"].as<float>());
         Gri_pitch = round(doc["pitch"].as<float>());
         Gri_yaw = round(doc["yaw"].as<float>());

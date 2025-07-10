@@ -17,6 +17,9 @@ When working in Laboratory groups, we suggest you:
 To work on the project (during lab sessions or for homework at home), the `Director` or `Collaborators` have to clone the `Director`'s github project in Visual Studio Code local environment.
 - Open VScode on lab's PC, go to Desktop folder and clone the `Director`'s github project.
 ![](./Images/Setup/clone.png)
+- In VScode open the folder you have cloned to work on the project
+![](./Images/Setup/project_code.png)
+
 
 ## **2. Review the needed tools**
 
