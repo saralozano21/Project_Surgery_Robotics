@@ -19,56 +19,35 @@ To work on the project (during lab sessions or for homework at home), the `Direc
 ![](./Images/Setup/clone.png)
 - In VScode open the folder you have cloned to work on the project
 ![](./Images/Setup/project_code.png)
+- You can work on the project and add/modify any files of the project.
 
 
 ## **2. Review the needed tools**
 
-When
+You will need to use:
+- Visual Studio Code with extensions:
+  - Python Extension Pack
+  - Git Extension Pack
+  - "Arduino Community Edition" (vscode-arduino)
+- roboDK
+
+To proceed with Arduino uploading program, follow instructions in:
+https://github.com/manelpuig/VScode_Arduino_ESP32/blob/main/1_Install%26Setup.md 
 
 ## **3. Update and syncronize the repository project**
 
-When working on a Laboratory project, the objective at the end of a Lab session is to update the changes you have made. This can be made either by the `Project-Director` of the Lab group or by any other `Collaborator` following the procedure:
-- First time on the TheConstruct environment, you have to clone the `Project-Director` github project:
-  ````shell
-  git clone https://github.com/Director_user_name/ROS2_rUBot_mecanum_ws.git
-  ````
-- Next times, the project ws will be already in the TheConstruct environment. Now you have to access to the TheConstruct environment local repository:
-  ````shell
-  cd /home/user/ROS2_rUBot_mecanum_ws
-  ````
-- Update the local repository with possible changes in github origin repository
-  ````shell
-  git pull
-  ````
-- You can work with your local repository for the speciffic project session
-- Once you have finished and you want to syncronize the changes you have made and update the github origin repository, type:
-  ````shell
-  git add .
-  git commit -m "Message"
-  ````
-- When you will Push them, the first time you will be asked to link the repository to your github account:
-- Open a terminal in and type the first time:
-  ```shell
-  git config --global user.email "manel.puig@ub.edu"
-  git config --global user.name "manelpuig"
-  git commit -m "Message"
-  git push
-  ```
-  > change the email and username and message
-- You will have to specify your Username and Password (Personal Access Token you have generated)
+When working on a Laboratory project, the objective at the end of a Lab session is to update the changes you have made. 
 
-To obtain the **PAT** in github follow the instructions:
-
-  - Log in to GitHub
-  - Click on your profile picture and select `settings`
-  - Select `Developer Settings`
-  - Select Access Personal Access Tokens: Choose Tokens (classic)
-  - Click Generate new token (classic) and configure it:
-    - Add a note to describe the purpose of the token, e.g., "ROS repo sync."
-    - Set the expiration (e.g., 30 days, 60 days, or no expiration).
-    - Under Scopes, select the permissions required:
-      - For repository sync, you usually need: repo (full control of private repositories)
-    - Click Generate token
-  - Once the token is generated, copy it immediately. You won't be able to see it again after leaving the page.
+This can be made either by the `Director` of the Lab group or by any other `Collaborator` following the procedure:
+- Either the `Director`or the `Collaborators`have to be sure they are connected to their Github Account. 
+  - Click on Accounts in Black left bar
+  - Select "Backup and Sync settings..."
+  - Select "Sign in"
+  - Choose your GitHub account
+- To syncronize the changes you have made and update the github origin repository:
+  - Select "Source control" from Black left bar
+  - Add all changes
+  - type a Message
+  - select "Sync"
 
 The `Project-Director` github repository has been updated!
