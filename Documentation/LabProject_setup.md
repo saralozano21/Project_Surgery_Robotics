@@ -44,10 +44,13 @@ This can be made either by the `Director` of the Lab group or by any other `Coll
   - Select "Backup and Sync settings..."
   - Select "Sign in"
   - Choose your GitHub account
+  - Click "Allow" to give access to your account
+  - If there are sync conflicts select "Use local settings"
 - To syncronize the changes you have made and update the github origin repository:
   - Select "Source control" from Black left bar
   - Add all changes
   - type a Message
+  -select "Commit"
   - select "Sync"
 
 The `Project-Director` github repository has been updated!
