@@ -44,7 +44,9 @@ This can be made either by the `Director` of the Lab group or by any other `Coll
   - Add a Message
   - select "Commit"
   - select "Sync"
+  
 ![](./Images/Setup/code_sync.png)
+
 The first time you will be asked to link the repository to your github account.
 
 Open a terminal in and type the first time:
