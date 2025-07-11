@@ -39,18 +39,21 @@ https://github.com/manelpuig/VScode_Arduino_ESP32/blob/main/1_Install%26Setup.md
 When working on a Laboratory project, the objective at the end of a Lab session is to update the changes you have made. 
 
 This can be made either by the `Director` of the Lab group or by any other `Collaborator` following the procedure:
-- Either the `Director`or the `Collaborators`have to be sure they are connected to their Github Account. 
-  - Click on Accounts in Black left bar
-  - Select "Backup and Sync settings..."
-  - Select "Sign in"
-  - Choose your GitHub account
-  - Click "Allow" to give access to your account
-  - If there are sync conflicts select "Use local settings"
-- To syncronize the changes you have made and update the github origin repository:
   - Select "Source control" from Black left bar
-  - Add all changes
-  - type a Message
-  -select "Commit"
+  - Press Add to syncronyze all changes
+  - Add a Message
+  - select "Commit"
   - select "Sync"
+![](./Images/Setup/code_sync.png)
+The first time you will be asked to link the repository to your github account.
 
-The `Project-Director` github repository has been updated!
+Open a terminal in and type the first time:
+````shell
+git config --global user.email "mail@alumnes.ub.edu" 
+git config --global user.name "your github username"
+````
+>You will have to allow access to your github account.
+
+For succesive times, you only need to select changes, Commit message and Push
+
+The `Director` github repository has been updated!
