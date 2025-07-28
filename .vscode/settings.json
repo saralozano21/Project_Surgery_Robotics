@@ -1,16 +1,12 @@
 {
-    //Uncomment the interpreter you want to use
-    "terminal.integrated.env.windows": {
-        "PATH": "C:\\RoboDK\\Python-Embedded\\;${env:PATH}"
-    },
-    // Specify the default Python interpreter path
-    "python.defaultInterpreterPath": 
-        "C:\\RoboDK\\Python-Embedded\\python.exe",
-
-        // Additional common Python-related settings
-    "editor.tabSize": 4, // Set tab size to 4 spaces
-    
-    // Color theme setting
+    "python.defaultInterpreterPath": "C:\\RoboDK\\Python37\\python.exe",
+    "python.analysis.extraPaths": [
+        "C:\\RoboDK\\Python37\\Lib\\site-packages"
+    ],
+    "python.terminal.activateEnvironment": false,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
     "workbench.colorTheme": "Visual Studio Light",
-    "ros.distro": "noetic"
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python-envs.pythonProjects": []
 }
