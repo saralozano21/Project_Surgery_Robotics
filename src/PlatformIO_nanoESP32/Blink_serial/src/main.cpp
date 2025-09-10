@@ -1,18 +1,19 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+const int LED = 21; // Built-in LED pin for Nano ESP32
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200);
+  pinMode(LED, OUTPUT);
+  Serial.println("Starting Blink Program...");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-}
+  digitalWrite(LED, HIGH);
+  Serial.println("LED is ON");
+  delay(500);
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+  digitalWrite(LED, LOW);
+  Serial.println("LED is OFF");
+  delay(500);
 }
