@@ -1,14 +1,18 @@
 #include <Arduino.h>
 
-const int LED = 2;
+const int ledPin = 2; // GPIO2, sovint connectat a un LED integrat
 
 void setup() {
-  pinMode(LED, OUTPUT);
+  Serial.begin(115200); // Inicialitza el port sèrie
+  pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(LED, HIGH);
-  delay(500);
-  digitalWrite(LED, LOW);
-  delay(500);
+  digitalWrite(ledPin, HIGH);
+  Serial.println("Led switched ON");
+  delay(1000);
+
+  digitalWrite(ledPin, LOW);
+  Serial.println("Led switched OFF");
+  delay(2000);
 }

@@ -3,59 +3,114 @@
 The objectives of this section are:
 - Setup the project in student's github
 - Review the needed tools
-- Update and syncronize the repository project
+- Create a simple ESP32 Blink project with PlatformIO and VS Code
 
-## **1. Setup the project in student's github**
+## **1. Setup the project**
 
-When working in Laboratory groups, we suggest you:
-- One student plays the role of `Director`. This student makes a "Fork" of the Professor's github project.
-- The `Director` accept the other students as `Collaborators`
-![](./Images/Setup/github_collaborators.png)
-- Then the `Collaborators` will make a "fork" of the `Director`'s github project.
-- The `Collaborators` will be able to update the github `Director`'s project and participate on the project generation
-
-To work on the project (during lab sessions or for homework at home), the `Director` or `Collaborators` have to clone the `Director`'s github project in Visual Studio Code local environment.
-- Open VScode on lab's PC, go to Desktop folder and clone the `Director`'s github project.
-![](./Images/Setup/clone.png)
-- In VScode open the folder you have cloned to work on the project
-![](./Images/Setup/project_code.png)
-- You can work on the project and add/modify any files of the project.
-
+You have to select a local folder to clone the Project repository. 
+- Open Visual Studio Code on this folder
+- Open a git terminal and clone the forked github project from Director's repository.
+- add credential information from your github account
+  ````shell
+  git config --global user.email "mail@alumnes.ub.edu" 
+  git config --global user.name "your github username"
+  ````
+- You can work on the project locally
+- to update your changes:
+  ````shell
+  git add .
+  git commit -m "your message"
+  git push
+  ````
+- You can check the changes in your github repository
 
 ## **2. Review the needed tools**
 
-You will need to use:
-- Visual Studio Code with extensions:
-  - Python Extension Pack
-  - Git Extension Pack
-  - "Arduino Community Edition" (vscode-arduino)
-- roboDK
+You will need to use a new tool to program the ESP32 microcontroller.:
+- Visual Studio Code with extension "PlatformIO IDE" (PlatformIO)
 
-To proceed with Arduino uploading program, follow instructions in:
-https://github.com/manelpuig/VScode_Arduino_ESP32/blob/main/1_Install%26Setup.md 
 
-## **3. Update and syncronize the repository project**
+## **3. Create a simple ESP32 Blink project**
 
-When working on a Laboratory project, the objective at the end of a Lab session is to update the changes you have made. 
+This project demonstrates how to blink an LED using an ESP32 board programmed with PlatformIO and the Arduino framework inside Visual Studio Code.
 
-This can be made either by the `Director` of the Lab group or by any other `Collaborator` following the procedure:
-  - Select "Source control" from Black left bar
-  - Press Add to syncronyze all changes
-  - Add a Message
-  - select "Commit"
-  - select "Sync"
-  
-![](./Images/Setup/code_sync.png)
+## 🧰 Requirements
 
-The first time you will be asked to link the repository to your github account.
+- ESP32 DevKit v1
+- USB cable
+- Visual Studio Code
+- PlatformIO IDE Extension
 
-Open a terminal in and type the first time:
-````shell
-git config --global user.email "mail@alumnes.ub.edu" 
-git config --global user.name "your github username"
-````
->You will have to allow access to your github account.
+## 🚀 Create the Blink Project
 
-For succesive times, you only need to select changes, Commit message and Push
+- Click the alien icon (PlatformIO Home)
+- Click on Projects & Configuration
+- Click `New Project`
+- Name the project: `ESP32Test_Blink`
+- Select board: `Espressif ESP32 Dev Module`
+- Framework: `Arduino`
+- Click `Finish`
 
-The `Director` github repository has been updated!
+PlatformIO will create the project structure and download necessary tools.
+The final structure will be like this:
+
+```
+ESP32Test_Blink/
+├── src/
+│   └── main.cpp
+├── lib
+└── platformio.ini
+```
+
+To open an existing project, click `Open Project` in PlatformIO Home and select the project folder. The selected project will appear in new folder on root path of VScode.
+
+## 🧾 Source Code: `src/main.cpp`
+
+```cpp
+#include <Arduino.h>
+
+const int ledPin = 2; // GPIO2, sovint connectat a un LED integrat
+
+void setup() {
+  Serial.begin(115200); // Inicialitza el port sèrie
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(ledPin, HIGH);
+  Serial.println("Led switched ON");
+  delay(1000);
+
+  digitalWrite(ledPin, LOW);
+  Serial.println("Led switched OFF");
+  delay(1000);
+}
+```
+
+## ⚙️ Configuration File: `platformio.ini`
+
+```ini
+[env:esp32dev]
+platform = espressif32
+board = esp32dev
+framework = arduino
+monitor_speed = 115200
+```
+
+## ⚙️ Add libraries
+
+To add libraries:
+
+- Go to the PlatformIO Home → Libraries tab.
+- Search for the library you want.
+- Click "Add to Project" and select your project.
+
+## 🚀 Upload and Monitor
+
+To upload your code to the ESP32 board and monitor the serial output:
+
+1. Connect your ESP32 board to your computer via USB.
+2. In PlatformIO, click the "Upload" button (right arrow icon) in the bottom toolbar.
+3. After the upload is complete, click the "Monitor" button (magnifying glass icon) to open the serial monitor.
+4. You should see the serial output from your ESP32 board.
+5. The onboard LED should blink on and off every second.
