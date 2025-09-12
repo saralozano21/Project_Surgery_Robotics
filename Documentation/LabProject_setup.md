@@ -62,10 +62,13 @@ ESP32Test_Blink/
 └── platformio.ini
 ```
 
-To open an existing project, click `Open Project` in PlatformIO Home and select the project folder. The selected project will appear in new folder on root path of VScode.
+To open an existing project, click `Open Project` in PlatformIO Home and select the project folder (from the list of existing projects or you have to search it from your local PC). The selected project will appear in new folder on root path of VScode.
+
+If the platform is the same, you can make a copy of the project folder and rename it to your new project name.
 
 ## 🧾 Source Code: `src/main.cpp`
 
+For this speciffic exemple, replace the content of `src/main.cpp` with the following code:
 ```cpp
 #include <Arduino.h>
 
@@ -88,6 +91,7 @@ void loop() {
 ```
 
 ## ⚙️ Configuration File: `platformio.ini`
+Here we will add the "monitor_speed" option to set the serial monitor baud rate to 115200.
 
 ```ini
 [env:esp32dev]
@@ -99,7 +103,7 @@ monitor_speed = 115200
 
 ## ⚙️ Add libraries
 
-To add libraries:
+For this exemple you do not need any library, but in a general project to add libraries:
 
 - Go to the PlatformIO Home → Libraries tab.
 - Search for the library you want.
