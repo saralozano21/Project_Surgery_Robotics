@@ -29,6 +29,7 @@ This project demonstrates how to blink an LED using an ESP32 board programmed wi
 ## 🚀 Create the Blink Project
 
 1. Click the alien icon (PlatformIO Home)
+- Click on Projects & Configuration
 2. Click `New Project`
 3. Name the project: `blink`
 4. Select board: `Espressif ESP32 Dev Module`
