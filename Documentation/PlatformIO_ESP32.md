@@ -15,31 +15,31 @@ This project demonstrates how to blink an LED using an ESP32 board programmed wi
 
 ---
 
-## ⚙️ Environment Setup
-
-1. **Install Visual Studio Code**: [https://code.visualstudio.com/](https://code.visualstudio.com/)
-2. **Install PlatformIO IDE**:
-   - Open VS Code
-   - Go to Extensions (4-block icon)
-   - Search for `PlatformIO IDE` and install it
-   - Restart VS Code
-
----
-
 ## 🚀 Create the Blink Project
 
-1. Click the alien icon (PlatformIO Home)
+- Click the alien icon (PlatformIO Home)
 - Click on Projects & Configuration
-2. Click `New Project`
-3. Name the project: `blink`
-4. Select board: `Espressif ESP32 Dev Module`
-5. Framework: `Arduino`
-6. Click `Finish`
+- Click `New Project`
+- Name the project: `ESP32Test_Blink`
+- Select board: `Espressif ESP32 Dev Module`
+- Framework: `Arduino`
+- Click `Finish`
 
 PlatformIO will create the project structure and download necessary tools.
 
 ---
+## ⚙️ Project Structure
 
+```
+ESP32Test_Blink/
+├── src/
+│   └── main.cpp
+├── lib
+└── platformio.ini
+
+```
+
+---
 ## 🧾 Source Code: `src/main.cpp`
 
 ```cpp
