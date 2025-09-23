@@ -9,13 +9,22 @@ The objectives of this section are:
 
 You have to select a local folder to clone the Project repository. 
 - Open Visual Studio Code on this folder
+
+### First time
 - Open a git terminal and clone the forked github project from Director's repository.
 - add credential information from your github account
   ````shell
   git config --global user.email "mail@alumnes.ub.edu" 
   git config --global user.name "your github username"
   ````
-- You can work on the project locally
+- You will have to add the `.vscode/settings.json` in your local repository
+
+### Next times
+- before working on your project you have to update your local repository with last changes on remote github repository:
+  ````shell
+  git pull
+  ````
+- Now you can work on the project locally
 - to update your changes:
   ````shell
   git add .
