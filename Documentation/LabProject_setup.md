@@ -43,35 +43,31 @@ You will need to use a new tool to program the ESP32 microcontroller.:
 
 This project demonstrates how to blink an LED using an ESP32 board programmed with PlatformIO and the Arduino framework inside Visual Studio Code.
 
-## 🧰 Requirements
-
-- ESP32 DevKit v1
-- USB cable
-- Visual Studio Code
-- PlatformIO IDE Extension
-
 ## 🚀 Create the Blink Project
 
 - Click the alien icon (PlatformIO Home)
-- Click on Projects & Configuration
-- Click `New Project`
-- Name the project: `ESP32Test_Blink`
-- Select board: `Espressif ESP32 Dev Module`
-- Framework: `Arduino`
-- Click `Finish`
+- Click on Home
+- Click `New Project` or `Open Project`
+- If you create a New Project, you have to specify:
+  - Name the project: `ESP32Test_Blink`
+  - Select board: `Espressif ESP32 Dev Module`
+  - Framework: `Arduino`
+  - Click `Finish`
+- If you Open an existing Project, you have to specify:
+  - Verify `platformIO.ini`
+  - Verify the `main.cpp`
+  - then upload
 
 PlatformIO will create the project structure and download necessary tools.
 The final structure will be like this:
 
-```
-ESP32Test_Blink/
-├── src/
-│   └── main.cpp
-├── lib
-└── platformio.ini
-```
-
-To open an existing project, click `Open Project` in PlatformIO Home and select the project folder (from the list of existing projects or you have to search it from your local PC). The selected project will appear in new folder on root path of VScode.
+  ```
+  ESP32Test_Blink/
+  ├── src/
+  │   └── main.cpp
+  ├── lib
+  └── platformio.ini
+  ```
 
 If the platform is the same, you can make a copy of the project folder and rename it to your new project name.
 

@@ -80,7 +80,7 @@ The different modes of operation of the system are:
 The **hardware setup** of the first prototype of the DaVinci surgery system is based on:
 - A "Robotics_UB" router: Assigning a fixed IP address to each module (x corresponds to group number)
   - SSID: Robotics_UB
-  - Password: rUBot_xx
+  - Password: 
 - Hardware modules:
   - UR5e robot arm with Endowrist tool
   - PC control with roboDK program and python scripts (IP:192.168.1.x5)
@@ -97,9 +97,9 @@ The **software setup** of the first prototype of the DaVinci surgery system is b
     - Init_SurgeryRobotics_simulation.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm in simulated roboDK program environment
     - Init_SurgeryRobotics_real.py: Initial python program frame to read the data from the Gripper and Endowrist modules and send it to the UR5e robot arm using sockeds in real environment
 - Arduino programs:
-    - Gripper.ino: Arduino program for the Gripper module
-    - Endowrist.ino: Arduino program for the Endowrist module
-    - Servomotors.ino: Arduino program for the Servomotors module
+    - Gripper folder: Arduino program for the Gripper module
+    - Endowrist folder: Arduino program for the Endowrist module
+    - Servomotors folder: Arduino program for the Servomotors module
 
 ### Init Hardware-Software setup functionality
 The Initial functionality of the first prototype of the DaVinci surgery system is based on:
@@ -114,7 +114,7 @@ The Initial functionality of the first prototype of the DaVinci surgery system i
 
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup
-- Save the ESP32 InitialPrograms for the 3 ESP32 modules using th VScode Arduino Community Edition. Take care about the proper IP address of each module and PC.
+- Save the ESP32 InitialPrograms for the 3 ESP32 modules using PlatformIO. Take care about the proper IP address of each module and PC.
 - Run the InitSurgeryRobotic_simulation.rdk file in the roboDK program to visualize the UR5e robot arm and the Endowrist tool.
 - Test the system performances described above 
 - Try to perform a suture process in simulation according to the following video:
