@@ -32,6 +32,7 @@ sock.bind((UDP_IP, UDP_PORT))
 # Initialize RoboDK
 def initialize_robodk(absolute_path):
     RDK = Robolink()
+    time.sleep(2)  # wait for RoboDK to be ready
     RDK.AddFile(absolute_path)
     robot = RDK.Item(ROBOT_NAME)
     base = RDK.Item(f'{ROBOT_NAME} Base')
@@ -49,7 +50,7 @@ def initialize_robodk(absolute_path):
     needle.setPose(needle_init)
     robot.setSpeed(50)
     robot.MoveL(Init_target)
-    return robot, base, gripper, needle
+    return RDK, robot, base, gripper, needle
 
 # Transformation Endowrist to base
 def endowrist2base_orientation(roll, pitch, yaw):
@@ -175,6 +176,7 @@ def on_closing():
         #print(f"Error al tancar el socket: {e}")
         pass
     root.destroy()
+
 # Update functions for sliders
 def set_zero_yaw_tool(value):
     global ZERO_YAW_TOOL
@@ -183,11 +185,12 @@ def set_zero_yaw_tool(value):
 def set_zero_yaw_gripper(value):
     global ZERO_YAW_GRIPPER
     ZERO_YAW_GRIPPER = float(value)
+
 # Main function
 def main():
     global root, ZERO_YAW_TOOL, ZERO_YAW_GRIPPER, robot, gripper, base, text_label, absolute_path
     
-    robot, base, gripper, needle = initialize_robodk(absolute_path)
+    RDK, robot, base, gripper, needle = initialize_robodk(absolute_path)
 
     root = tk.Tk()
     root.title("Suture Process")
@@ -217,6 +220,9 @@ def main():
     robot_thread.start()
 
     root.mainloop()
+    print("Pop-up menu closed")
+    RDK.CloseRoboDK()
+    print("RoboDK closed")
 
 if __name__ == "__main__":
     main()
