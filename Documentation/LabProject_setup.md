@@ -115,8 +115,8 @@ For this exemple you do not need any library, but in a general project to add li
 
 To upload your code to the ESP32 board and monitor the serial output:
 
-1. Connect your ESP32 board to your computer via USB.
-2. In PlatformIO, click the "Upload" button (right arrow icon) in the bottom toolbar.
-3. After the upload is complete, click the "Monitor" button (magnifying glass icon) to open the serial monitor.
-4. You should see the serial output from your ESP32 board.
-5. The onboard LED should blink on and off every second.
+- Connect your ESP32 board to your computer via USB.
+- In PlatformIO, click the "Upload" button (right arrow icon) in the bottom toolbar.
+- After the upload is complete, click the "Serial Monitor" button to open the serial monitor. You have to close the terminal to Close the serial port.
+- You can also see the serial monitor from the Terminal menu `SERIAL MONITOR`. Choose the correct COM port and click `Start Monitoring`. You have to `Stop Monitoring` to Close the serial port.
+- The onboard LED should blink on and off every second.
