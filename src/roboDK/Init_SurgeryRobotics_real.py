@@ -42,6 +42,7 @@ sock.bind((UDP_IP, UDP_PORT))
 # Initialize RoboDK
 def initialize_robodk(absolute_path):
     RDK = Robolink()
+    time.sleep(2)  # wait for RoboDK to be ready
     RDK.AddFile(absolute_path)
     robot = RDK.Item(ROBOT_NAME)
     base = RDK.Item(f'{ROBOT_NAME} Base')
@@ -59,7 +60,7 @@ def initialize_robodk(absolute_path):
     needle.setPose(needle_init)
     robot.setSpeed(50)
     robot.MoveL(Init_target)
-    return robot, base, gripper, needle
+    return RDK, robot, base, gripper, needle
 
 # Initialize UR5e socket communication
 def check_robot_port(ROBOT_IP, ROBOT_PORT):
@@ -224,9 +225,9 @@ def set_zero_yaw_gripper(value):
     ZERO_YAW_GRIPPER = float(value)
 # Main function
 def main():
-    global root, ZERO_YAW_TOOL, ZERO_YAW_GRIPPER, robot, gripper, base, text_label, robot_is_connected
+    global root, ZERO_YAW_TOOL, ZERO_YAW_GRIPPER, robot, gripper, base, text_label, robot_is_connected, absolute_path
     
-    robot, base, gripper, needle = initialize_robodk()
+    RDK, robot, base, gripper, needle = initialize_robodk(absolute_path)
     
     #Connexio amb robot UR5e
     robot_is_connected=check_robot_port(ROBOT_IP, ROBOT_PORT)
@@ -259,6 +260,9 @@ def main():
     robot_thread.start()
 
     root.mainloop()
+    print("Pop-up menu closed")
+    RDK.CloseRoboDK()
+    print("RoboDK closed")
 
 if __name__ == "__main__":
     main()

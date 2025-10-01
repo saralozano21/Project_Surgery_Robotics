@@ -39,37 +39,45 @@ You will need to use a new tool to program the ESP32 microcontroller.:
 - Visual Studio Code with extension "PlatformIO IDE" (PlatformIO)
 
 
-## **3. Create a simple ESP32 Blink project**
+## **3. Create a NEW ESP32 Blink project**
 
-This project demonstrates how to blink an LED using an ESP32 board programmed with PlatformIO and the Arduino framework inside Visual Studio Code.
+This project demonstrates how to create a new project. This project is to blink an LED using an ESP32 board programmed with PlatformIO and the Arduino framework inside Visual Studio Code.
 
-## 🚀 Create the Blink Project
+## 🚀 Create a New Blink Project
 
 - Click the alien icon (PlatformIO Home)
-- Click on Home
-- Click `New Project` or `Open Project`
-- If you create a New Project, you have to specify:
+- Click `Create New Project` (In Project Tasks - Lefft-side bar menu) and `New Project` (on quick Access)
+- You have to specify:
   - Name the project: `ESP32Test_Blink`
   - Select board: `Espressif ESP32 Dev Module`
   - Framework: `Arduino`
+  - Unselect "Location: Use defauld location" and select your `src` Project_Surgery_Robotics folder
   - Click `Finish`
-- If you Open an existing Project, you have to specify:
-  - Verify `platformIO.ini`
-  - Verify the `main.cpp`
-  - then upload
+  - After few minutes your created project will appear in src folder and also an instance outside in VScode root folder
 
-PlatformIO will create the project structure and download necessary tools.
-The final structure will be like this:
+  PlatformIO will create the project structure and download necessary tools. The final structure will be like this:
 
+    ```
+    ESP32Test_Blink/
+    ├── src/
+    │   └── main.cpp
+    ├── lib
+    └── platformio.ini
+    ```
+
+## ⚙️ Configuration File: `platformio.ini`
+
+Verify `platformIO.ini`
+
+Here we will add the "monitor_speed" option to set the serial monitor baud rate to 115200.
+
+  ```ini
+  [env:esp32dev]
+  platform = espressif32
+  board = esp32dev
+  framework = arduino
+  monitor_speed = 115200
   ```
-  ESP32Test_Blink/
-  ├── src/
-  │   └── main.cpp
-  ├── lib
-  └── platformio.ini
-  ```
-
-If the platform is the same, you can make a copy of the project folder and rename it to your new project name.
 
 ## 🧾 Source Code: `src/main.cpp`
 
@@ -93,17 +101,6 @@ void loop() {
   Serial.println("Led switched OFF");
   delay(1000);
 }
-```
-
-## ⚙️ Configuration File: `platformio.ini`
-Here we will add the "monitor_speed" option to set the serial monitor baud rate to 115200.
-
-```ini
-[env:esp32dev]
-platform = espressif32
-board = esp32dev
-framework = arduino
-monitor_speed = 115200
 ```
 
 ## ⚙️ Add libraries
