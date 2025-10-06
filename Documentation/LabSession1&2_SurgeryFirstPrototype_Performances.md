@@ -32,7 +32,7 @@ By facilitating smaller incisions, the DaVinci system aims to reduce pain and bl
 
 ### The objective of this laboratory session will be:
 - Develop a simpler prototype of DaVinci system in our Biorobotic's Lab facilities
-- Identify the main needed sensors and actuators needed
+- Identify the main sensors and actuators needed
 - Start with a simple Surgery robotic maneobrability GUI interface
 - Identify limitation performances and find useful solutions
 - Implement your own improved surgical robotic system
@@ -43,7 +43,7 @@ Review this video to see the main performances of a DaVinci surgery system:
 Review this video to see an exemple of your final project demonstration:
 [![final project demonstration](Images/Session1/demo.png)](https://youtu.be/wzx2_t7iajo?feature=shared)
 
-### Simple DaVinci system prototype in Biorobotcs Lab
+### Simple DaVinci system prototype in Biorobotics Lab
 
 In Biorobotics lab you will have a simple prototype of DaVinci system based on:
 - UR5e robot arm
@@ -115,7 +115,7 @@ The Initial functionality of the first prototype of the DaVinci surgery system i
 The proposed tasks for this first session are:
 - Connect properly the Hardware setup
 - Save the ESP32 InitialPrograms for the 3 ESP32 modules using PlatformIO. Take care about the proper IP address of each module and PC.
-- Run the InitSurgeryRobotic_simulation.rdk file in the roboDK program to visualize the UR5e robot arm and the Endowrist tool.
+- Run the Init_SurgeryRobotic_simulation.rdk file in the roboDK program to visualize the UR5e robot arm and the Endowrist tool.
 - Test the system performances described above 
 - Try to perform a suture process in simulation according to the following video:
 [![suture process in simulation](Images/Session1/training.png)](https://youtu.be/1t3-Ggcp_Hg?feature=shared)

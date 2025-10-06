@@ -53,3 +53,11 @@ The proposed tasks for this first session are:
 [![suture process in simulation](Images/Session1/training.png)](https://youtu.be/1t3-Ggcp_Hg?feature=shared)
 
 Show and explain the system performances to your teacher.
+
+### Project Presentation
+
+Each Laboratory group has up to 10 minutes project presentation with:
+
+- Project presentation: with some slides summarising what you have learned and what you have done in this project
+- Software and Hardware live demonstration of the assistive robotic tasks designed in the previous session.
+- All the students have to contribute to the final presentation
