@@ -77,14 +77,7 @@ void setup() {
   delay(2000);
 
   // Inicialitza IMU (amb DMP)
-  if (!imu.begin()) {
-    while (true) {
-      Serial.println("[IMU] Connection failed. Check wiring/I2C.");
-      delay(2000);
-    }
-  }
-  Serial.println("[IMU] Connected and initialized.");
-  delay(2000);
+  imu.Install();
 
   connectToWiFi();
   udp.begin(udpPort);
