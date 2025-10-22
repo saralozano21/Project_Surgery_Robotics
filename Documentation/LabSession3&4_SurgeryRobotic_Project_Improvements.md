@@ -22,9 +22,9 @@ You have seen the complexity to perform a simple surgery process in roboDK simul
 The main improvements are based on:
 - Servomotors module:
     - Review how the RPY angles are applied to the four servomotors to obtain the desired Gripper orientation. Make necessary corrections to:
-        - Apply Roll angle from initial servomoto position in 90º
-        - Apply Pitch angle from initial servomoto position in 90º
-        - Apply `Yaw angle variation` from initial servomoto position in 90º to be independent of the geographical North 
+        - Apply Roll angle from initial servomotor position in 90º
+        - Apply Pitch angle from initial servomotor position in 90º
+        - Apply `Yaw angle variation` from initial servomotor position in 90º to be independent of the geographical North 
     - the torques are already read on the four servomotors to detect the gripper contact with the tissue.
         ![ServomotorsModule](././Images/Session1/Servos1.png)
         ![ServomotorsModule](././Images/Session1/Servos2.png)
@@ -54,8 +54,8 @@ The main improvements are based on:
 - PC module:
     - Add Servomotor torques reading
         - Modify the Python program to add numeric torque values in TKinter pop-up window
-        - Add a color code to indicate the torque level in the TKinter pop-up window
-    - Real time control of the UR5e robot arm:
+        - Add a "buttom" with color code to indicate the torque level in the TKinter pop-up window
+    - (Optional) Real time control of the UR5e robot arm:
         - Create a copy of the `InitSurgeryRobotic_simulation.rdk` file to `InitSurgeryRobotic_real.rdk` file. Implement the UR5e movements using Python based sockets program.
         - Modify the Python program to send the UR5e robot arm orientation commands according to the Endowrist tool orientation.
     
