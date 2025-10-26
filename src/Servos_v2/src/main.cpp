@@ -46,8 +46,8 @@ float sumRoll1 = 0, sumRoll2 = 0, sumPitch = 0, sumYaw = 0;
 float OldValueRoll = 0, OldValuePitch = 0, OldValueYaw = 0;
 float roll = 0, pitch = 0, yaw = 0;
 int s1 = 1, s2 = 1;
-float initial_yaw = 0.0; // To store initial yaw reference
-bool yaw_initialized = false; // Flag for yaw initialization
+float initial_yaw = 0.0; 
+bool yaw_initialized = false; 
 
 void connectToWiFi() {
   Serial.print("Connecting to Wi-Fi");
@@ -154,11 +154,10 @@ void sendTorquesToGripperAndPC() {
 }
 
 void moveServos() {
-  roll = 90 + Gri_roll; // Apply roll from 90º initial position
+  roll = 90 + Gri_roll;
   OldValueRoll = roll;
-  pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
+  pitch = 90 + Gri_pitch; 
   OldValuePitch = pitch;
-  // Apply yaw variation from initial position (independent of North)
   float yaw_variation = 0;
   if (yaw_initialized) {
     yaw_variation = Gri_yaw - initial_yaw;
@@ -216,13 +215,13 @@ void setup() {
 void loop() {
   receiveOrientationUDP();
   moveServos();
-  // Read torques from all servos
+
   Torque_roll1 = getTorque(sumRoll1, PIN_ANALOG_ROLL1, prevRoll1);
   Torque_roll2 = getTorque(sumRoll2, PIN_ANALOG_ROLL2, prevRoll2);
   Torque_pitch = getTorque(sumPitch, PIN_ANALOG_PITCH, prevPitch);
   Torque_yaw = getTorque(sumYaw, PIN_ANALOG_YAW, prevYaw);
 
-  // Send torques to gripper and PC
+ 
   sendTorquesToGripperAndPC();
   delay(10);
 }
