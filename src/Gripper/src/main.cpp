@@ -78,11 +78,12 @@ void sendOrientationUDP() {
   udp.endPacket();
 }
 
+// Added improvement: To receive torques
 void receiveTorquesUDP() {
-  int packetSize = udp.parsePacket(); 
+  int packetSize = udp.parsePacket(); // Asks UDP if there's any packet available
   if (packetSize) {
-    char incomingPacket[512]; 
-    int len = udp.read(incomingPacket, sizeof(incomingPacket) - 1); 
+    char incomingPacket[512]; // 512 bytes to keep the UDP message
+    int len = udp.read(incomingPacket, sizeof(incomingPacket) - 1); // Reads the message
     if (len > 0) {
       incomingPacket[len] = 0; 
     }
@@ -90,10 +91,11 @@ void receiveTorquesUDP() {
     JsonDocument doc;
     DeserializationError error = deserializeJson(doc, incomingPacket);
     if (!error) {
-      
+      // Read received torques
       if (doc.containsKey("Torque_roll1")) Torque_roll1 = doc["Torque_roll1"];
       if (doc.containsKey("Torque_pitch")) Torque_pitch = doc["Torque_pitch"];
       if (doc.containsKey("Torque_yaw")) Torque_yaw = doc["Torque_yaw"];
+
 
       // Vibration motor control based on torque values
       float totalTorque = Torque_roll1 + Torque_pitch + Torque_yaw;
