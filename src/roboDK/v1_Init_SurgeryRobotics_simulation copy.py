@@ -23,7 +23,7 @@ READ_INTERVAL_S = 0.01
 
 Endowrist_rpy = None
 Gripper_rpy = None
-Servo_torques = None
+Servo_torques = None #afegir per a torques
 data_lock = threading.Lock()# semaphor to manage data from 2 threads
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
