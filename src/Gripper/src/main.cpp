@@ -78,6 +78,34 @@ void sendOrientationUDP() {
   udp.endPacket();
 }
 
+void receiveTorquesUDP() {
+  int packetSize = udp.parsePacket(); 
+  if (packetSize) {
+    char incomingPacket[512]; 
+    int len = udp.read(incomingPacket, sizeof(incomingPacket) - 1); 
+    if (len > 0) {
+      incomingPacket[len] = 0; 
+    }
+
+    JsonDocument doc;
+    DeserializationError error = deserializeJson(doc, incomingPacket);
+    if (!error) {
+      
+      if (doc.containsKey("Torque_roll1")) Torque_roll1 = doc["Torque_roll1"];
+      if (doc.containsKey("Torque_pitch")) Torque_pitch = doc["Torque_pitch"];
+      if (doc.containsKey("Torque_yaw")) Torque_yaw = doc["Torque_yaw"];
+
+      // Vibration motor control based on torque values
+      float totalTorque = Torque_roll1 + Torque_pitch + Torque_yaw;
+      // Convert torque to PWM value (0-255)
+      int vibrationValue = constrain(totalTorque * 2.5, 0, 255); // Adjust the scaling factor as needed
+      ledcWrite(0, vibrationValue); // Set the PWM value for the vibration motor
+      Serial.print("Vibration motor value: ");
+      Serial.println(vibrationValue); 
+    }
+  }
+}
+
 void setup() {
   Serial.begin(115200);
   Wire.begin();
