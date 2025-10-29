@@ -138,5 +138,9 @@ void setup() {
 void loop() {
   updateOrientation();
   sendOrientationUDP();
+
+  // I call my new function in each iteration so that it reads the torque continuously
+  receiveTorquesUDP(); 
+
   delay(10);
 }
