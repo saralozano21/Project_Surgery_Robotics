@@ -80,29 +80,29 @@ void sendOrientationUDP() {
 
 // Added improvement: To receive torques
 void receiveTorquesUDP() {
-  int packetSize = udp.parsePacket();
+  int packetSize = udp.parsePacket(); // Asks UDP if there's any packet available
   if (packetSize) {
-    char incomingPacket[512];
-    int len = udp.read(incomingPacket, sizeof(incomingPacket) - 1);
+    char incomingPacket[512]; // 512 bytes to keep the UDP message
+    int len = udp.read(incomingPacket, sizeof(incomingPacket) - 1); // Reads the message
     if (len > 0) {
-      incomingPacket[len] = 0; // Termina la cadena
+      incomingPacket[len] = 0; 
     }
 
     JsonDocument doc;
     DeserializationError error = deserializeJson(doc, incomingPacket);
     if (!error) {
-      // Leer los valores de torque recibidos
+      // Read received torques
       if (doc.containsKey("Torque_roll1")) Torque_roll1 = doc["Torque_roll1"];
       if (doc.containsKey("Torque_pitch")) Torque_pitch = doc["Torque_pitch"];
       if (doc.containsKey("Torque_yaw")) Torque_yaw = doc["Torque_yaw"];
 
-      // 🔹 Controlar el motor de vibración según los torques
+      // Vibration motor control based on torque values
       float totalTorque = Torque_roll1 + Torque_pitch + Torque_yaw;
-      int vibrationValue = constrain(totalTorque * 2.5, 0, 255); // Ajusta el factor según sensibilidad
-      ledcWrite(0, vibrationValue);
-
+      // Convert torque to PWM value (0-255)
+      int vibrationValue = constrain(totalTorque * 2.5, 0, 255); // Adjust the scaling factor as needed
+      ledcWrite(0, vibrationValue); // Set the PWM value for the vibration motor
       Serial.print("Vibration motor value: ");
-      Serial.println(vibrationValue);
+      Serial.println(vibrationValue); 
     }
   }
 }
