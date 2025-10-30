@@ -47,7 +47,9 @@ float OldValueRoll = 0, OldValuePitch = 0, OldValueYaw = 0;
 float roll = 0, pitch = 0, yaw = 0;
 int s1 = 1, s2 = 1;
 float initial_yaw = 0.0; // To store initial yaw reference
-bool yaw_initialized = false; // Flag for yaw initialization
+bool yaw_initialized = true; // Flag for yaw initialization
+float delta_yaw = 0.0;
+float delta_yaw_old = 0.0;
 
 void connectToWiFi() {
   Serial.print("Connecting to Wi-Fi");
@@ -89,15 +91,6 @@ void receiveOrientationUDP() {
         Gri_yaw = round(doc["yaw"].as<float>());
         s1 = doc["s1"];
         s2 = doc["s2"];
-
-        // Initialize yaw reference on first valid reading
-        if (!yaw_initialized && Gri_yaw != 0.0) {
-          initial_yaw = Gri_yaw;
-          yaw_initialized = true;
-          Serial.print("Initial yaw set to: ");
-          Serial.println(initial_yaw);
-        }
-
         Serial.print("Gri_Roll: "); Serial.print(Gri_roll);
         Serial.print(" Gri_Pitch: "); Serial.print(Gri_pitch);
         Serial.print(" Gri_Yaw: "); Serial.println(Gri_yaw);
@@ -154,28 +147,35 @@ void sendTorquesToGripperAndPC() {
 }
 
 void moveServos() {
-  if (270<Gri_roll<360){
+  if (Gri_roll >= 270 && Gri_roll<=360){
     roll = 90 + Gri_roll-360; // Apply roll from 90º initial position
     OldValueRoll = roll;
-  } else {
+  } else if (Gri_roll>= 0 && Gri_roll<=90)
+  {
     roll = 90 + Gri_roll; // Apply roll from 90º initial position
     OldValueRoll = roll;
   }
 
-  if (270<Gri_pitch<360){
+  if (Gri_pitch >= 270 && Gri_pitch<=360){
     pitch = 90 + Gri_pitch-360; // Apply pitch from 90º initial position
     OldValuePitch = pitch;
-  } else {
+  } else if (Gri_pitch>= 0 && Gri_pitch<=90)
+  {
     pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
     OldValuePitch = pitch;
   }
   
   // Apply yaw variation from initial position (independent of North)
-  float yaw_variation = 0;
   if (yaw_initialized) {
-    yaw_variation = Gri_yaw - initial_yaw;
+    initial_yaw = Gri_yaw;
+    OldValueYaw = initial_yaw;
+    delta_yaw = Gri_yaw - OldValueYaw;
+    yaw_initialized = false;
   }
-  yaw = 90 + yaw_variation;
+  delta_yaw = Gri_yaw - OldValueYaw;
+  delta_yaw_old = delta_yaw;
+  delta_yaw += delta_yaw_old;
+  yaw = 90 + initial_yaw + Gri_yaw;
   OldValueYaw = yaw;
 
   float delta = 0;

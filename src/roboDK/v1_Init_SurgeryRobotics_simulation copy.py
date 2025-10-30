@@ -80,7 +80,7 @@ def read_data_UDP():
                 elif device_id == "G2_Gri":
                     with data_lock:
                         Gripper_rpy = received_data
-                elif device_id == "G2_Servo": #per a guardar les dades de torques
+                elif device_id == "G2_Servos": #per a guardar les dades de torques
                     with data_lock:
                         Servo_torques = received_data
             except json.JSONDecodeError:
