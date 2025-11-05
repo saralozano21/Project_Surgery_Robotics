@@ -140,24 +140,36 @@ void sendTorquesToGripperAndPC() {
 
   // Serialize JSON to string
   char buffer[512];
-  size_t n = serializeJson(doc, buffer);
+  size_t jsonLen = serializeJson(doc, buffer);
 
   // Send to gripper ESP32
   udp.beginPacket(receiverESP32IP, udpPort);
-  udp.write((uint8_t*)buffer, len);
+  udp.write((uint8_t*)buffer, jsonLen);
   udp.endPacket();
 
   // Send to computer
   udp.beginPacket(receiverComputerIP, udpPort);
-  udp.write((uint8_t*)buffer, len);
+  udp.write((uint8_t*)buffer, jsonLen);
   udp.endPacket();
 }
 
 void moveServos() {
-  roll = 90 + Gri_roll; // Apply roll from 90º initial position
-  OldValueRoll = roll;
-  pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
-  OldValuePitch = pitch;
+  if (270<Gri_roll<360){
+    roll = 90 + Gri_roll-360; // Apply roll from 90º initial position
+    OldValueRoll = roll;
+  } else {
+    roll = 90 + Gri_roll; // Apply roll from 90º initial position
+    OldValueRoll = roll;
+  }
+
+  if (270<Gri_pitch<360){
+    pitch = 90 + Gri_pitch-360; // Apply pitch from 90º initial position
+    OldValuePitch = pitch;
+  } else {
+    pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
+    OldValuePitch = pitch;
+  }
+  
   // Apply yaw variation from initial position (independent of North)
   float yaw_variation = 0;
   if (yaw_initialized) {

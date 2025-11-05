@@ -47,7 +47,13 @@ float OldValueRoll = 0, OldValuePitch = 0, OldValueYaw = 0;
 float roll = 0, pitch = 0, yaw = 0;
 int s1 = 1, s2 = 1;
 float initial_yaw = 0.0; // To store initial yaw reference
+<<<<<<< HEAD
 bool yaw_initialized = false; // Flag for yaw initialization
+=======
+bool yaw_initialized = true; // Flag for yaw initialization
+float delta_yaw = 0.0;
+float delta_yaw_old = 0.0;
+>>>>>>> 518280e56c1747403782d6e0d2e6c5ea1a06765e
 
 void connectToWiFi() {
   Serial.print("Connecting to Wi-Fi");
@@ -89,6 +95,7 @@ void receiveOrientationUDP() {
         Gri_yaw = round(doc["yaw"].as<float>());
         s1 = doc["s1"];
         s2 = doc["s2"];
+<<<<<<< HEAD
 
         // Initialize yaw reference on first valid reading
         if (!yaw_initialized && Gri_yaw != 0.0) {
@@ -98,6 +105,8 @@ void receiveOrientationUDP() {
           Serial.println(initial_yaw);
         }
 
+=======
+>>>>>>> 518280e56c1747403782d6e0d2e6c5ea1a06765e
         Serial.print("Gri_Roll: "); Serial.print(Gri_roll);
         Serial.print(" Gri_Pitch: "); Serial.print(Gri_pitch);
         Serial.print(" Gri_Yaw: "); Serial.println(Gri_yaw);
@@ -140,20 +149,33 @@ void sendTorquesToGripperAndPC() {
 
   // Serialize JSON to string
   char buffer[512];
+<<<<<<< HEAD
   size_t n = serializeJson(doc, buffer);
 
   // Send to gripper ESP32
   udp.beginPacket(receiverESP32IP, udpPort);
   udp.write((uint8_t*)buffer, len);
+=======
+  size_t jsonLen = serializeJson(doc, buffer);
+
+  // Send to gripper ESP32
+  udp.beginPacket(receiverESP32IP, udpPort);
+  udp.write((uint8_t*)buffer, jsonLen);
+>>>>>>> 518280e56c1747403782d6e0d2e6c5ea1a06765e
   udp.endPacket();
 
   // Send to computer
   udp.beginPacket(receiverComputerIP, udpPort);
+<<<<<<< HEAD
   udp.write((uint8_t*)buffer, len);
+=======
+  udp.write((uint8_t*)buffer, jsonLen);
+>>>>>>> 518280e56c1747403782d6e0d2e6c5ea1a06765e
   udp.endPacket();
 }
 
 void moveServos() {
+<<<<<<< HEAD
   roll = 90 + Gri_roll; // Apply roll from 90º initial position
   OldValueRoll = roll;
   pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
@@ -167,6 +189,37 @@ void moveServos() {
     yaw = 90;
   }
   
+=======
+  if (Gri_roll >= 270 && Gri_roll<=360){
+    roll = 90 + Gri_roll-360; // Apply roll from 90º initial position
+    OldValueRoll = roll;
+  } else if (Gri_roll>= 0 && Gri_roll<=90)
+  {
+    roll = 90 + Gri_roll; // Apply roll from 90º initial position
+    OldValueRoll = roll;
+  }
+
+  if (Gri_pitch >= 270 && Gri_pitch<=360){
+    pitch = 90 + Gri_pitch-360; // Apply pitch from 90º initial position
+    OldValuePitch = pitch;
+  } else if (Gri_pitch>= 0 && Gri_pitch<=90)
+  {
+    pitch = 90 + Gri_pitch; // Apply pitch from 90º initial position
+    OldValuePitch = pitch;
+  }
+  
+  // Apply yaw variation from initial position (independent of North)
+  if (yaw_initialized) {
+    initial_yaw = Gri_yaw;
+    OldValueYaw = initial_yaw;
+    delta_yaw = Gri_yaw - OldValueYaw;
+    yaw_initialized = false;
+  }
+  delta_yaw = Gri_yaw - OldValueYaw;
+  delta_yaw_old = delta_yaw;
+  delta_yaw += delta_yaw_old;
+  yaw = 90 + initial_yaw + Gri_yaw;
+>>>>>>> 518280e56c1747403782d6e0d2e6c5ea1a06765e
   OldValueYaw = yaw;
 
   float delta = 0;
