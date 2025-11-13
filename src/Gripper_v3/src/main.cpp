@@ -118,7 +118,7 @@ void receiveTorqueUDP() {
       Serial.print("Torque Pitch: "); Serial.println(torque_pitch);
       Serial.print("Torque Yaw: ");   Serial.println(torque_yaw);
 
-      // 🟠 Vibration motor control based on torque values
+      // Vibration motor control based on torque values
       float totalTorque = torque_roll1 + torque_pitch + torque_yaw;
       // Convert torque to PWM value (0-255)
       int vibrationValue = constrain(totalTorque * 2.5, 0, 255); // Adjust the scaling factor as needed
@@ -146,7 +146,7 @@ void setup() {
   pinMode(PIN_S1, INPUT);
   pinMode(PIN_S2, INPUT);
 
-  // 🟢 Configure PWM for the vibration motor (channel 0)
+  // Configure PWM for the vibration motor (channel 0)
   ledcSetup(0, 5000, 8); // Channel 0, frequency 5kHz, resolution 8 bits
   ledcAttachPin(vibrationPin, 0); // Attach the vibration motor to channel 0
 }
