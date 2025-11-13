@@ -87,7 +87,7 @@ void sendOrientationUDP() {
   udp.endPacket();
 }
 
-// 🟢 Funció per rebre torques i controlar la vibració
+// Funció per rebre torques i controlar la vibració
 void receiveTorqueUDP() {
   int packetSize = udp.parsePacket();
   if (packetSize) {
