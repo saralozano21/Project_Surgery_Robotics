@@ -191,7 +191,7 @@ void moveServos() {
     yaw = 90;
   }
 
-  OldVAlueYaw = yaw;
+  OldValueYaw = yaw;
 
   float delta = 0;
   if (s1 == 0) {
