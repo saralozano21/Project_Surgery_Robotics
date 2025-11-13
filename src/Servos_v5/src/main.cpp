@@ -48,8 +48,6 @@ float roll = 0, pitch = 0, yaw = 0;
 int s1 = 1, s2 = 1;
 float initial_yaw = 0.0; // To store initial yaw reference
 bool yaw_initialized = false; // Flag for yaw initialization
-float delta_yaw = 0.0;
-float delta_yaw_old = 0.0;
 
 void connectToWiFi() {
   Serial.print("Connecting to Wi-Fi");
@@ -177,21 +175,11 @@ void moveServos() {
   }
   
   // Apply yaw variation from initial position (independent of North)
-  delta_yaw = 0;
+  float yaw_variation = 0;
   if (yaw_initialized) {
-    // Calculate variation from initial gripper yaw reading
-    delta_yaw = Gri_yaw - initial_yaw;
-    
-    // Servo starts at 90 degrees and follows yaw changes
-    yaw = 90 + delta_yaw;
-    
-    Serial.print("Delta Yaw: "); Serial.print(delta_yaw);
-    Serial.print(" Servo Yaw: "); Serial.println(yaw);
-  } else {
-    // If not initialized, keep at neutral position
-    yaw = 90;
+    yaw_variation = Gri_yaw - initial_yaw;
   }
-
+  yaw = 90 + yaw_variation;
   OldValueYaw = yaw;
 
   float delta = 0;
