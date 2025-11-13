@@ -99,7 +99,10 @@ void receiveOrientationUDP() {
           yaw_initialized = true;
           Serial.print("Initial yaw set to: ");
           Serial.println(initial_yaw);
+          servo_yaw.write(90);
+          yaw = 90;
         }
+        
 
         Serial.print("Gri_Roll: "); Serial.print(Gri_roll);
         Serial.print(" Gri_Pitch: "); Serial.print(Gri_pitch);
